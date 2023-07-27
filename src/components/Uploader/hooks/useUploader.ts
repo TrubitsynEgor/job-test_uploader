@@ -3,6 +3,7 @@ import { uploadFileOnDisk } from '../../../service/uploadFileOnDisk'
 import { getUploadLink } from '../../../service/getUploadLink'
 
 export const useUploader = () => {
+  // Объявляем все необходимые состояния ===>
   const [drag, setDrag] = useState(false)
   const [formDataArray, setFormDataArray] = useState<FormData[]>([])
   const [linkResponse, setLinkResponse] = useState<string[]>([])
@@ -15,15 +16,19 @@ export const useUploader = () => {
   const [error, setError] = useState(false)
   const [lengthError, setLengthError] = useState(false)
 
+  // Смена флага для drag для смены отображаемой области ===>
   const dragStartHandler = (e: DragEvent<HTMLSpanElement>) => {
     e.preventDefault()
     setDrag(true)
   }
-
+  // Смена флага для drag для смены отображаемой области ===>
   const dragLeaveHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     setDrag(false)
   }
+
+  // Основной handler для получения, преобразования файлов и сохранения их в состояние,
+  // так же отображение первого элемента на preview ===>
   const onDropHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     const uploadedFiles = [...e.dataTransfer.files]
@@ -48,7 +53,9 @@ export const useUploader = () => {
     reader.readAsDataURL(e.dataTransfer.files[0])
   }
 
+  // Отправляем файлы на ya-disk
   const sendFiles = async () => {
+    if (!linkResponse.length) return
     setLoader(true)
     await uploadFileOnDisk(linkResponse, formDataArray)
     setLoader(false)
@@ -57,6 +64,7 @@ export const useUploader = () => {
     setDrag(false)
   }
 
+  // Получаем линки для загрузки файлов, при каждом изменении массива files
   useEffect(() => {
     setLoader(true)
     const fetchLinks = async () => {
@@ -78,6 +86,7 @@ export const useUploader = () => {
       })
   }, [files])
 
+  // Простой переключатель для смены отображения алертов
   useEffect(() => {
     setInterval(() => {
       setAlert(false)

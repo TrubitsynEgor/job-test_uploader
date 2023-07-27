@@ -65,6 +65,7 @@ export const Uploader: FC<DetailsDivProps> = ({ className }) => {
       )}
 
       <Button
+        disabled={loader ? true : false}
         className={styles.btn}
         onClick={sendFiles}
         type="primary"

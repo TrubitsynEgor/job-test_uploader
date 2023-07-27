@@ -74,7 +74,7 @@ export const Uploader: FC<DetailsDivProps> = ({ className }) => {
 
     fetchLinks()
       .then(() => console.log('Загрузка ссылок завершена'))
-      .catch((err) => setError(true))
+      .catch(() => setError(true))
   }, [files])
 
   useEffect(() => {

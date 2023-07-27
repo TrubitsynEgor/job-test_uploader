@@ -106,5 +106,6 @@ export const useUploader = () => {
     dragLeaveHandler,
     onDropHandler,
     sendFiles,
+    files,
   }
 }

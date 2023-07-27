@@ -17,6 +17,7 @@ export const Uploader: FC<DetailsDivProps> = ({ className }) => {
     dragLeaveHandler,
     onDropHandler,
     sendFiles,
+    files,
   } = useUploader()
   return (
     <div className={cn(styles.uploader, className)}>
@@ -73,6 +74,17 @@ export const Uploader: FC<DetailsDivProps> = ({ className }) => {
       >
         Отправить
       </Button>
+
+      <ul>
+        {files.map((el) => (
+          <li key={el.name}>
+            <img
+              src={`https://disk.yandex.ru/d/8UTFs0LhpPJ_0g/${el.name}`}
+              alt=""
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

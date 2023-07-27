@@ -17,7 +17,6 @@ export const Uploader: FC<DetailsDivProps> = ({ className }) => {
     dragLeaveHandler,
     onDropHandler,
     sendFiles,
-    files,
   } = useUploader()
   return (
     <div className={cn(styles.uploader, className)}>
